@@ -24,7 +24,8 @@ public class Persona {
     private String segundoApe;
     @Column (name = "telefono")
     private String telefono;
-    @Column (name = "id_direccion")
-    private Long idDireccion;
+    @ManyToOne
+    @JoinColumn (name = "id_direccion_fk")
+    private Direccion direccion;
 
 }

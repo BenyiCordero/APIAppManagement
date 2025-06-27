@@ -16,7 +16,8 @@ public class Cliente {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_cliente")
     private Long idCliente;
-    @Column (name = "id_persona")
-    private Long idPersona;
+    @OneToOne
+    @JoinColumn(name = "id_persona_fk")
+    private Persona persona;
 
 }

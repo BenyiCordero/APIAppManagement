@@ -56,12 +56,8 @@ public class SecurityConfig {
                     return configuration;
                 }))
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/auth/**")
-                                .permitAll()
-                                .requestMatchers("/consultas/**")
-                                .authenticated()
-                                .anyRequest()
-                                .authenticated()
+                        req.requestMatchers("/auth/**").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)

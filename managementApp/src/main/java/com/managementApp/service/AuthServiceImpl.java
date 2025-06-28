@@ -1,13 +1,16 @@
 package com.managementApp.service;
 
 import com.managementApp.auth.Rol;
+import com.managementApp.domain.Direccion;
 import com.managementApp.domain.Empleado;
 import com.managementApp.domain.Persona;
 import com.managementApp.domain.Token;
 import com.managementApp.dto.AuthRequest;
 import com.managementApp.dto.RegisterRequest;
 import com.managementApp.dto.TokenResponse;
+import com.managementApp.repository.DireccionRepository;
 import com.managementApp.repository.EmpleadoRepository;
+import com.managementApp.repository.PersonaRepository;
 import com.managementApp.repository.TokenRepository;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +38,36 @@ public class AuthServiceImpl implements AuthService {
     AuthenticationManager authenticationManager;
     @Autowired
     EmpleadoService empleadoService;
+    @Autowired
+    DireccionService direccionService;
+    @Autowired
+    PersonaRepository personaRepository;
 
     @Override
     public TokenResponse register(final RegisterRequest request) {
+        Direccion direccion = Direccion.builder()
+                .calle(request.calle())
+                .colonia(request.colonia())
+                .numeroExterior(request.numeroExterior())
+                .numeroInterior(request.numeroInterior())
+                .codigoPostal(request.codigoPostal())
+                .build();
+        Direccion savedDireccion = direccionService.saveIfNotExists(direccion);
+
         Persona persona = Persona.builder()
                 .nombre(request.name())
+                .primerApe(request.primerApellido())
+                .segundoApe(request.segundoApellido())
+                .telefono(request.telefono())
+                .direccion(savedDireccion)
                 .build();
+        Persona savedPersona = personaRepository.save(persona);
 
         Empleado empleado = Empleado.builder()
-                .persona(persona)
+                .persona(savedPersona)
                 .rol(Rol.ADMIN)
                 .email(request.email())
-                .password(request.password())
+                .password(passwordEncoder.encode(request.password()))
                 .build();
 
         final Empleado savedAdminUser = repository.save(empleado);

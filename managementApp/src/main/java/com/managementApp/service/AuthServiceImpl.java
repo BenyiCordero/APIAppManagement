@@ -66,7 +66,7 @@ public class AuthServiceImpl implements AuthService {
 
         Empleado empleado = Empleado.builder()
                 .persona(savedPersona)
-                .rol(Rol.ADMIN)
+                .rol(request.rol())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .build();

@@ -43,6 +43,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     PersonaRepository personaRepository;
 
+    @Transactional //Hace que se haga todo y si falla no se hace nada, a falta de manejar la excepcion
     @Override
     public TokenResponse register(final RegisterRequest request) {
         Direccion direccion = Direccion.builder()
@@ -69,8 +70,8 @@ public class AuthServiceImpl implements AuthService {
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .build();
-
         final Empleado savedAdminUser = repository.save(empleado);
+
         final String jwtToken = jwtService.generateToken(savedAdminUser);
         final String refreshToken = jwtService.generateRefreshToken(savedAdminUser);
 

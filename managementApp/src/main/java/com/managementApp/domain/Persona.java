@@ -2,6 +2,7 @@ package com.managementApp.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Persona")
+@Builder
 public class Persona {
 
     @Id
@@ -27,5 +29,4 @@ public class Persona {
     @ManyToOne
     @JoinColumn (name = "id_direccion_fk")
     private Direccion direccion;
-
 }

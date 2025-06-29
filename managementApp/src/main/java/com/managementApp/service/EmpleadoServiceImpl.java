@@ -1,6 +1,7 @@
 package com.managementApp.service;
 
 import com.managementApp.domain.Empleado;
+import com.managementApp.dto.EmployeeResponse;
 import com.managementApp.repository.EmpleadoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,14 @@ public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService 
     @Override
     public Optional<Empleado> findByEmail(String email) {
         return empleadoRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<EmployeeResponse> findByEmailResponse(String email) {
+        return empleadoRepository.findByEmail(email)
+                .map(empleado -> new EmployeeResponse(
+                        empleado.getRol(),
+                        empleado.getPersona()
+                ));
     }
 }

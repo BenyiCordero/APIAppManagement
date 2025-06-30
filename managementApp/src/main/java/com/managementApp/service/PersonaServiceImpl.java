@@ -3,9 +3,11 @@ package com.managementApp.service;
 import com.managementApp.domain.Persona;
 import com.managementApp.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class PersonaServiceImpl implements PersonaService {
     @Autowired
     PersonaRepository repository;

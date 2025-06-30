@@ -14,4 +14,6 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer> {
             String primerApe,
             String segundoApe
     );
+
+
 }

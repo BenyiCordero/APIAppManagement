@@ -60,4 +60,15 @@ public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService 
         }
         return Optional.of(response);
     }
+
+    @Override
+    public Empleado saveIfNotExists(Empleado empleado) {
+        Optional<Empleado> employeeExists = empleadoRepository.findByEmail(empleado.getEmail());
+
+        if(employeeExists.isPresent()) {
+            return employeeExists.get();
+        }
+
+        return empleadoRepository.save(empleado);
+    }
 }

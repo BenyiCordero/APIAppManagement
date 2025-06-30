@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,5 +44,20 @@ public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService 
                         empleado.getRol(),
                         empleado.getPersona()
                 ));
+    }
+
+    @Override
+    public Optional<List<EmployeeResponse>> findAll() {
+        List<Empleado> empleados = empleadoRepository.findAll();
+        List<EmployeeResponse> response = new ArrayList<>();
+
+        if (empleados.isEmpty()) {
+            return Optional.empty();
+        }
+
+        for(Empleado e : empleados) {
+            response.add(new EmployeeResponse(e.getRol(), e.getPersona()));
+        }
+        return Optional.of(response);
     }
 }

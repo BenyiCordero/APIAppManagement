@@ -2,6 +2,7 @@ package com.managementApp.service;
 
 import com.managementApp.domain.Empleado;
 import com.managementApp.dto.EmployeeResponse;
+import com.managementApp.exception.EmpleadoExistenteException;
 import com.managementApp.repository.EmpleadoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService 
         Optional<Empleado> employeeExists = empleadoRepository.findByEmail(empleado.getEmail());
 
         if(employeeExists.isPresent()) {
-            return employeeExists.get();
+            throw new EmpleadoExistenteException();
         }
 
         return empleadoRepository.save(empleado);

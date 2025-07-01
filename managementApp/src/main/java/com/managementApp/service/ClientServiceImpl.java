@@ -33,6 +33,7 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     @Override
     public Cliente postClient(ClientRequest request) {
+        //Guarda una direccion si es que la direccion no existe (debe comparar todos los campos)
         Direccion direccion = Direccion.builder()
                 .calle(request.calle())
                 .colonia(request.colonia())
@@ -42,6 +43,7 @@ public class ClientServiceImpl implements ClientService {
                 .build();
         Direccion savedDireccion = direccionService.saveIfNotExists(direccion);
 
+        //Guarda una persona (Debe de guardar todo
         Persona persona = Persona.builder()
                 .nombre(request.nombre())
                 .primerApe(request.primerApe())
@@ -51,6 +53,7 @@ public class ClientServiceImpl implements ClientService {
                 .build();
         Persona savedPersona = personaService.saveIfNotExists(persona);
 
+        //Los clientes deben de guardarse siempre ya que puede haber 2 personas (no es lo comun) que se llamen igual.
         Cliente clienteMapped = Cliente.builder()
                 .persona(savedPersona)
                 .build();
@@ -58,4 +61,6 @@ public class ClientServiceImpl implements ClientService {
 
         return savedCliente;
     }
+
+
 }

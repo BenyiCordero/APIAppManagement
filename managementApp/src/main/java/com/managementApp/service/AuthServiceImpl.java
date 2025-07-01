@@ -41,7 +41,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     DireccionService direccionService;
     @Autowired
-    PersonaRepository personaRepository;
+    PersonaService personaService;
 
     @Transactional //Hace que se haga todo y si falla no se hace nada, a falta de manejar la excepcion
     @Override
@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
                 .telefono(request.telefono())
                 .direccion(savedDireccion)
                 .build();
-        Persona savedPersona = personaRepository.save(persona);
+        Persona savedPersona = personaService.saveIfNotExists(persona);
 
         Empleado empleado = Empleado.builder()
                 .persona(savedPersona)

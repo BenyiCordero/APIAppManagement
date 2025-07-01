@@ -10,9 +10,8 @@ import java.util.Optional;
 public interface CitaService {
 
     CitaDetails saveCita (CitaDetailsDTO citaDetailsDTO);
-    void deleteCita (Long id);
-    void updateCita (CitaDetailsDTO citaDetailsDTO);
-    List<CitaDetails> findAllCitas();
-    Optional<Cita> findCitaById (Long id);
+    void deleteCita (Long id, CitaDetailsDTO citaDetailsDTO);
+    CitaDetails updateCita (Long id, CitaDetailsDTO citaDetailsDTO);
+    List<CitaDetails> findAllCitas(Long id);
 
 }

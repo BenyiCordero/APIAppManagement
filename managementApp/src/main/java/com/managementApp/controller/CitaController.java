@@ -19,9 +19,9 @@ public class CitaController {
         this.citaService = citaService;
     }
 
-    @GetMapping ("/getAppointments")
-    public ResponseEntity<?> getAllAppointments() {
-        List<CitaDetails> citas = citaService.findAllCitas();
+    @GetMapping ("/getAppointments/{id}")
+    public ResponseEntity<?> getAllAppointments(@PathVariable Long id) {
+        List<CitaDetails> citas = citaService.findAllCitas(id);
         if (citas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
@@ -29,9 +29,9 @@ public class CitaController {
     }
 
     @DeleteMapping ("/deleteAppointment/{id}")
-    public ResponseEntity<?> deleteAppointments(@PathVariable Long id) {
+    public ResponseEntity<?> deleteAppointments(@PathVariable Long id, @RequestBody CitaDetailsDTO citaDetailsDTO) {
         try {
-            citaService.deleteCita(id);
+            citaService.deleteCita(id, citaDetailsDTO);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -48,4 +48,13 @@ public class CitaController {
         }
     }
 
+    @PutMapping ("/updateAppointment/{id}")
+    public ResponseEntity<?> updateAppointment(@PathVariable Long id, @RequestBody CitaDetailsDTO citaDetailsDTO) {
+        try {
+            citaService.updateCita(id, citaDetailsDTO);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 }

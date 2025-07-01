@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface DireccionRepository extends JpaRepository<Direccion, Integer> {
+public interface DireccionRepository extends JpaRepository<Direccion, Long> {
     Optional<Direccion> findByCalleAndColoniaAndNumeroExteriorAndNumeroInteriorAndCodigoPostal(
             String calle,
             String colonia,

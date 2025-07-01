@@ -52,14 +52,14 @@ public class CitaServiceImpl implements CitaService {
         CitaDetails citaDetails = new CitaDetails();
         citaDetails.setMonto(citaDetailsDTO.monto());
 
-        List<CitaDetails>  citas = empleadoRepository.findByEmpleado_Id(empleado.getIdEmpleado());
+        List<CitaDetails>  citas = citaDetailsRepository.findByEmpleado_Id(empleado.getIdEmpleado());
 
         for (CitaDetails citaDetail : citas) {
             if (citaDetailsDTO.horaInicio().equals(citaDetail.getHoraInicio())){
                 throw new RuntimeException("Hora repetida");
             }
-            citaDetails.setHoraInicio(citaDetailsDTO.horaInicio());
         }
+        citaDetails.setHoraInicio(citaDetailsDTO.horaInicio());
         citaDetails.setHoraFin(citaDetailsDTO.horaFin());
         citaDetails.setFecha(citaDetailsDTO.fecha());
         citaDetails.setCita(citaGuardada);
@@ -76,7 +76,7 @@ public class CitaServiceImpl implements CitaService {
         Empleado empleado = empleadoRepository.findById(citaDetailsDTO.id_empleado())
                 .orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + citaDetailsDTO.id_empleado()));
 
-        List<CitaDetails> citas = empleadoRepository.findByEmpleado_Id(empleado.getIdEmpleado());
+        List<CitaDetails> citas = citaDetailsRepository.findByEmpleado_Id(empleado.getIdEmpleado());
         for (CitaDetails citaDetails : citas) {
             if (citaDetails.getId_citad().equals(id)) {
                 citaDetailsRepository.delete(citaDetails);
@@ -115,6 +115,6 @@ public class CitaServiceImpl implements CitaService {
     @Override
     @Transactional(readOnly = true)
     public List<CitaDetails> findAllCitas(Long id) {
-        return empleadoRepository.findByEmpleado_Id(id);
+        return citaDetailsRepository.findByEmpleado_Id(id);
     }
 }

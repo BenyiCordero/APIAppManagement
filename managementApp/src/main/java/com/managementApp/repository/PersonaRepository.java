@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface PersonaRepository extends JpaRepository<Persona, Integer> {
     Optional<Persona> findByTelefono(
-        String telefono
+        String telefonoS
     );
 
 

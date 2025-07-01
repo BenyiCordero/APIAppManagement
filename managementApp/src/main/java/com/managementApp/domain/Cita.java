@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_cita;
+    private Long id_cita;
 
     @Column(nullable = false, length = 80)
     private String descripcion;

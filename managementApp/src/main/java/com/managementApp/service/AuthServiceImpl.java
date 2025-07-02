@@ -70,7 +70,7 @@ public class AuthServiceImpl implements AuthService {
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .build();
-        final Empleado savedAdminUser = repository.save(empleado);
+        final Empleado savedAdminUser = empleadoService.saveIfNotExists(empleado);
 
         final String jwtToken = jwtService.generateToken(savedAdminUser);
         final String refreshToken = jwtService.generateRefreshToken(savedAdminUser);

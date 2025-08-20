@@ -1,6 +1,7 @@
 package com.managementApp.service;
 
 import com.managementApp.domain.Empleado;
+import com.managementApp.dto.ConfiguracionProjectionResponse;
 import com.managementApp.dto.EmployeeResponse;
 import com.managementApp.exception.EmpleadoExistenteException;
 import com.managementApp.repository.EmpleadoRepository;
@@ -71,5 +72,10 @@ public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService 
         }
 
         return empleadoRepository.save(empleado);
+    }
+
+    @Override
+    public ConfiguracionProjectionResponse findConfiguration(String email) {
+        return empleadoRepository.findConfiguration(email);
     }
 }

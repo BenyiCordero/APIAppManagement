@@ -57,4 +57,14 @@ public class CitaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
+    @GetMapping ("/citaDetails")
+    public ResponseEntity<?> CitaDetails (){
+        return ResponseEntity.status(HttpStatus.OK).body(citaService.CitaDetails());
+    }
+
+    @GetMapping ("/calcularTotal")
+    public ResponseEntity<?> CountCitas(){
+        return ResponseEntity.status(HttpStatus.OK).body(citaService.calcularTotalCitas());
+    }
 }

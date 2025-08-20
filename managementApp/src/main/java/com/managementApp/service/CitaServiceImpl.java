@@ -5,6 +5,7 @@ import com.managementApp.domain.CitaDetails;
 import com.managementApp.domain.Cliente;
 import com.managementApp.domain.Empleado;
 import com.managementApp.dto.CitaDetailsDTO;
+import com.managementApp.dto.TotalCitasResponse;
 import com.managementApp.repository.CitaDetailsRepository;
 import com.managementApp.repository.CitaRepository;
 import com.managementApp.repository.ClienteRepository;
@@ -116,5 +117,15 @@ public class CitaServiceImpl implements CitaService {
     @Transactional(readOnly = true)
     public List<CitaDetails> findAllCitas(Long id) {
         return citaDetailsRepository.findByEmpleado_Id(id);
+    }
+
+    @Override
+    public TotalCitasResponse CitaDetails() {
+        return citaDetailsRepository.CitaDetails();
+    }
+
+    @Override
+    public Double calcularTotalCitas() {
+        return citaDetailsRepository.calcularTotalCitas();
     }
 }

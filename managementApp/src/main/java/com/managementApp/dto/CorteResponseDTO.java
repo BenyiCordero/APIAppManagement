@@ -6,7 +6,7 @@ public record CorteResponseDTO(
         String nombre,
         String primerApe,
         String segundoApe,
-        String email,
+        Long idEmpleado,
         Date fecha,
         Long totalCitas,
         Double totalEfectivo,

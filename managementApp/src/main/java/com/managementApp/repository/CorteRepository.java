@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CorteRepository extends JpaRepository<Corte, Long> {
-    @Query(value = "SELECT * FROM v_corte WHERE email = ?", nativeQuery = true)
-    CorteResponseDTO findCorte(String email);
+    @Query(value = "SELECT * FROM v_corte WHERE id_empleado = ?", nativeQuery = true)
+    CorteResponseDTO findCorte(Long id_empleado);
 }

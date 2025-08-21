@@ -14,7 +14,7 @@ public class CorteServiceImpl implements CorteService {
     }
 
     @Override
-    public CorteResponseDTO findCorte(String email) {
-        return corteRepository.findCorte(email);
+    public CorteResponseDTO findCorte(Long idEmpleado ) {
+        return corteRepository.findCorte(idEmpleado);
     }
 }

@@ -19,9 +19,9 @@ public class CorteController {
         this.corteService = corteService;
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<?> getCorte(@PathVariable String email) {
-        return ResponseEntity.status(HttpStatus.OK).body(corteService.findCorte(email));
+    @GetMapping("/{idEmpleado}")
+    public ResponseEntity<?> getCorte(@PathVariable Long idEmpleado) {
+        return ResponseEntity.status(HttpStatus.OK).body(corteService.findCorte(idEmpleado));
     }
 
 }

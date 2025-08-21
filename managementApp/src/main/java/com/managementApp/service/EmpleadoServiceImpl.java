@@ -43,6 +43,7 @@ public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService 
     public Optional<EmployeeResponse> findByEmailResponse(String email) {
         return empleadoRepository.findByEmail(email)
                 .map(empleado -> new EmployeeResponse(
+                        empleado.getIdEmpleado(),
                         empleado.getRol(),
                         empleado.getPersona()
                 ));
@@ -58,7 +59,7 @@ public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService 
         }
 
         for(Empleado e : empleados) {
-            response.add(new EmployeeResponse(e.getRol(), e.getPersona()));
+            response.add(new EmployeeResponse(e.getIdEmpleado() ,e.getRol(), e.getPersona()));
         }
         return Optional.of(response);
     }

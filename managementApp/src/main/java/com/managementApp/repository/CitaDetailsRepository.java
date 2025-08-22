@@ -1,6 +1,7 @@
 package com.managementApp.repository;
 
 import com.managementApp.domain.CitaDetails;
+import com.managementApp.dto.CitaDetailsResponseDTO;
 import com.managementApp.dto.TotalCitasResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,6 @@ public interface CitaDetailsRepository extends JpaRepository<CitaDetails, Long> 
     TotalCitasResponse CitaDetails();
     @Query(value = "SELECT * FROM v_total_hoy", nativeQuery = true)
     Double calcularTotalCitas();
+    @Query(value = "SELECT * FROM v_cita_details WHERE id_empleado = ?", nativeQuery = true)
+    List<CitaDetailsResponseDTO> getCitaDetails(Long idEmpleado);
 }

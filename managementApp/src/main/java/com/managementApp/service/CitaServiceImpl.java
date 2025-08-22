@@ -5,6 +5,7 @@ import com.managementApp.domain.CitaDetails;
 import com.managementApp.domain.Cliente;
 import com.managementApp.domain.Empleado;
 import com.managementApp.dto.CitaDetailsDTO;
+import com.managementApp.dto.CitaDetailsResponseDTO;
 import com.managementApp.dto.TotalCitasResponse;
 import com.managementApp.repository.CitaDetailsRepository;
 import com.managementApp.repository.CitaRepository;
@@ -13,7 +14,6 @@ import com.managementApp.repository.EmpleadoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; // Para transacciones
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CitaServiceImpl implements CitaService {
@@ -127,5 +127,10 @@ public class CitaServiceImpl implements CitaService {
     @Override
     public Double calcularTotalCitas() {
         return citaDetailsRepository.calcularTotalCitas();
+    }
+
+    @Override
+    public List<CitaDetailsResponseDTO> findCitasByEmpleado(Long idEmpleado) {
+        return citaDetailsRepository.getCitaDetails(idEmpleado);
     }
 }

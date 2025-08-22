@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface EmpleadoRepository extends JpaRepository<Empleado, Long> {
+    Optional<Empleado> findById(Long id);
     Optional<Empleado> findByEmail(String email);
     @Query(value = "SELECT * FROM v_configuracion WHERE email = ?", nativeQuery = true)
     ConfiguracionProjectionResponse findConfiguration(String email);

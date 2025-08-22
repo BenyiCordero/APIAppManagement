@@ -67,4 +67,10 @@ public class CitaController {
     public ResponseEntity<?> CountCitas(){
         return ResponseEntity.status(HttpStatus.OK).body(citaService.calcularTotalCitas());
     }
+
+    @GetMapping ("/citaDetails/{id}")
+    public ResponseEntity<?> getCitaDetails(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(citaService.findCitasByEmpleado(id));
+    }
+
 }

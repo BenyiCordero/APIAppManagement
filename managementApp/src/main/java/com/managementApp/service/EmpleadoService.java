@@ -13,4 +13,5 @@ public interface EmpleadoService {
     Optional<List<EmployeeResponse>> findAll();
     Empleado saveIfNotExists(Empleado empleado);
     ConfiguracionProjectionResponse findConfiguration(String email);
+    Optional<Empleado> findById(Long id);
 }

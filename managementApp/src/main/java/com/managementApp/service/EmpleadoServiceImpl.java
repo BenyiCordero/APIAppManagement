@@ -79,4 +79,9 @@ public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService 
     public ConfiguracionProjectionResponse findConfiguration(String email) {
         return empleadoRepository.findConfiguration(email);
     }
+
+    @Override
+    public Optional<Empleado> findById(Long id) {
+        return empleadoRepository.findById(id);
+    }
 }

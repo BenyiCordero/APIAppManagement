@@ -1,6 +1,6 @@
 package com.managementApp.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.sql.Time;
 
 public record CitaDetailsDTO (
@@ -8,8 +8,8 @@ public record CitaDetailsDTO (
         Double monto,
         Time horaInicio,
         Time horaFin,
-        Date fecha,
-        Long id_empleado,
-        Long id_cliente
+        LocalDate fecha,
+        Long idEmpleado,
+        Long idCliente
 ){
 }

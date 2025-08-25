@@ -28,6 +28,6 @@ public class SalidaEfectivo {
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "id_empleado", nullable = false)
+    @JoinColumn(name = "idEmpleado", nullable = false)
     private Empleado empleado;
 }

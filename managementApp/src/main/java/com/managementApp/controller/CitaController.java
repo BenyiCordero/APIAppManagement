@@ -40,6 +40,7 @@ public class CitaController {
 
     @PostMapping ("/addAppointment")
     public ResponseEntity<?> addAppointment(@RequestBody CitaDetailsDTO citaDetailsDTO) {
+        System.out.println("📥 JSON recibido: " + citaDetailsDTO.toString());
         try {
             citaService.saveCita(citaDetailsDTO);
             return ResponseEntity.status(HttpStatus.OK).build();

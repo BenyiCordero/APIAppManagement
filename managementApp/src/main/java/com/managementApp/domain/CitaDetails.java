@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -29,17 +30,17 @@ public class CitaDetails {
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
 
     @ManyToOne
     @JoinColumn(name = "id_cita", nullable = false)
     private Cita cita;
 
     @ManyToOne
-    @JoinColumn(name = "id_empleado", nullable = false)
+    @JoinColumn(name = "idEmpleado", nullable = false)
     private Empleado empleado;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", nullable = false)
+    @JoinColumn(name = "idCliente", nullable = false)
     private Cliente cliente;
 }

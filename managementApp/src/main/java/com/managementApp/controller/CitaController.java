@@ -40,6 +40,7 @@ public class CitaController {
 
     @PostMapping ("/addAppointment")
     public ResponseEntity<?> addAppointment(@RequestBody CitaDetailsDTO citaDetailsDTO) {
+        System.out.println("📥 JSON recibido: " + citaDetailsDTO.toString());
         try {
             citaService.saveCita(citaDetailsDTO);
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -57,4 +58,20 @@ public class CitaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
+    @GetMapping ("/citaDetails")
+    public ResponseEntity<?> CitaDetails (){
+        return ResponseEntity.status(HttpStatus.OK).body(citaService.CitaDetails());
+    }
+
+    @GetMapping ("/calcularTotal")
+    public ResponseEntity<?> CountCitas(){
+        return ResponseEntity.status(HttpStatus.OK).body(citaService.calcularTotalCitas());
+    }
+
+    @GetMapping ("/citaDetails/{id}")
+    public ResponseEntity<?> getCitaDetails(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(citaService.findCitasByEmpleado(id));
+    }
+
 }

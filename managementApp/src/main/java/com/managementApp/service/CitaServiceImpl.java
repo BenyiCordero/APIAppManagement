@@ -5,6 +5,8 @@ import com.managementApp.domain.CitaDetails;
 import com.managementApp.domain.Cliente;
 import com.managementApp.domain.Empleado;
 import com.managementApp.dto.CitaDetailsDTO;
+import com.managementApp.dto.CitaDetailsResponseDTO;
+import com.managementApp.dto.TotalCitasResponse;
 import com.managementApp.repository.CitaDetailsRepository;
 import com.managementApp.repository.CitaRepository;
 import com.managementApp.repository.ClienteRepository;
@@ -12,7 +14,6 @@ import com.managementApp.repository.EmpleadoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; // Para transacciones
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CitaServiceImpl implements CitaService {
@@ -32,10 +33,10 @@ public class CitaServiceImpl implements CitaService {
     @Override
     @Transactional
     public CitaDetails saveCita(CitaDetailsDTO citaDetailsDTO) {
-        if (citaDetailsDTO.id_empleado() == null) {
+        if (citaDetailsDTO.idEmpleado() == null) {
             throw new RuntimeException("El ID del empleado no puede ser nulo.");
         }
-        if (citaDetailsDTO.id_cliente() == null) {
+        if (citaDetailsDTO.idCliente() == null) {
             throw new RuntimeException("El ID del cliente no puede ser nulo.");
         }
 
@@ -43,11 +44,11 @@ public class CitaServiceImpl implements CitaService {
         cita.setDescripcion(citaDetailsDTO.descripcion());
         Cita citaGuardada = citaRepository.save(cita);
 
-        Empleado empleado = empleadoRepository.findById(citaDetailsDTO.id_empleado())
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + citaDetailsDTO.id_empleado()));
+        Empleado empleado = empleadoRepository.findById(citaDetailsDTO.idEmpleado())
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + citaDetailsDTO.idEmpleado()));
 
-        Cliente cliente = clienteRepository.findById(citaDetailsDTO.id_cliente())
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + citaDetailsDTO.id_cliente()));
+        Cliente cliente = clienteRepository.findById(citaDetailsDTO.idCliente())
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + citaDetailsDTO.idCliente()));
 
         CitaDetails citaDetails = new CitaDetails();
         citaDetails.setMonto(citaDetailsDTO.monto());
@@ -73,8 +74,8 @@ public class CitaServiceImpl implements CitaService {
     @Transactional
     public void deleteCita(Long id, CitaDetailsDTO citaDetailsDTO) {
 
-        Empleado empleado = empleadoRepository.findById(citaDetailsDTO.id_empleado())
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + citaDetailsDTO.id_empleado()));
+        Empleado empleado = empleadoRepository.findById(citaDetailsDTO.idEmpleado())
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + citaDetailsDTO.idEmpleado()));
 
         List<CitaDetails> citas = citaDetailsRepository.findByEmpleado_Id(empleado.getIdEmpleado());
         for (CitaDetails citaDetails : citas) {
@@ -96,11 +97,11 @@ public class CitaServiceImpl implements CitaService {
         }
         citaExistente.setDescripcion(citaDetailsDTO.descripcion());
 
-        Empleado empleado = empleadoRepository.findById(citaDetailsDTO.id_empleado())
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + citaDetailsDTO.id_empleado()));
+        Empleado empleado = empleadoRepository.findById(citaDetailsDTO.idEmpleado())
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + citaDetailsDTO.idEmpleado()));
 
-        Cliente cliente = clienteRepository.findById(citaDetailsDTO.id_cliente())
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + citaDetailsDTO.id_cliente()));
+        Cliente cliente = clienteRepository.findById(citaDetailsDTO.idCliente())
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + citaDetailsDTO.idCliente()));
 
         citaDetailsExistente.setMonto(citaDetailsDTO.monto());
         citaDetailsExistente.setHoraInicio(citaDetailsDTO.horaInicio());
@@ -116,5 +117,20 @@ public class CitaServiceImpl implements CitaService {
     @Transactional(readOnly = true)
     public List<CitaDetails> findAllCitas(Long id) {
         return citaDetailsRepository.findByEmpleado_Id(id);
+    }
+
+    @Override
+    public TotalCitasResponse CitaDetails() {
+        return citaDetailsRepository.CitaDetails();
+    }
+
+    @Override
+    public Double calcularTotalCitas() {
+        return citaDetailsRepository.calcularTotalCitas();
+    }
+
+    @Override
+    public List<CitaDetailsResponseDTO> findCitasByEmpleado(Long idEmpleado) {
+        return citaDetailsRepository.getCitaDetails(idEmpleado);
     }
 }

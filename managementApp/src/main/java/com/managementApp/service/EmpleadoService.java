@@ -1,6 +1,7 @@
 package com.managementApp.service;
 
 import com.managementApp.domain.Empleado;
+import com.managementApp.dto.ConfiguracionProjectionResponse;
 import com.managementApp.dto.EmployeeResponse;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface EmpleadoService {
     Optional<EmployeeResponse> findByEmailResponse(String email);
     Optional<List<EmployeeResponse>> findAll();
     Empleado saveIfNotExists(Empleado empleado);
+    ConfiguracionProjectionResponse findConfiguration(String email);
+    Optional<Empleado> findById(Long id);
 }

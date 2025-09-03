@@ -19,7 +19,7 @@ public class Empleado {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "id_empleado")
+    @Column (name = "idEmpleado")
     private Long idEmpleado;
     @Enumerated(EnumType.STRING)
     @Column (name = "rol")

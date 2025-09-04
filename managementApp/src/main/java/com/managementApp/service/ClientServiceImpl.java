@@ -16,14 +16,15 @@ import java.util.Optional;
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    @Autowired
-    private ClientRepository repository;
+    private final ClientRepository repository;
+    private final DireccionService direccionService;
+    private final PersonaService personaService;
 
-    @Autowired
-    private DireccionService direccionService;
-
-    @Autowired
-    private PersonaService personaService;
+    public ClientServiceImpl(ClientRepository repository, DireccionService direccionService, PersonaService personaService) {
+        this.repository = repository;
+        this.direccionService = direccionService;
+        this.personaService = personaService;
+    }
 
     @Override
     public Optional<List<Cliente>> findAll() {

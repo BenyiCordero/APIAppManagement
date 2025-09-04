@@ -13,8 +13,11 @@ import java.util.List;
 @RequestMapping("/client")
 public class ClientController {
 
-    @Autowired
-    private ClientService service;
+    private final ClientService service;
+
+    public ClientController(ClientService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<Cliente>> getAllClients() {

@@ -10,8 +10,11 @@ import java.util.Optional;
 @Service
 public class DireccionServiceImpl implements DireccionService{
 
-    @Autowired
-    DireccionRepository repository;
+    private final DireccionRepository repository;
+
+    public DireccionServiceImpl(DireccionRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Direccion saveIfNotExists(Direccion direccion){

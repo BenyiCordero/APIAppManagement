@@ -10,8 +10,12 @@ import java.util.Optional;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
-    @Autowired
-    PersonaRepository repository;
+
+    private final PersonaRepository repository;
+
+    public PersonaServiceImpl(PersonaRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Persona saveIfNotExists(Persona persona){

@@ -28,14 +28,17 @@ import java.util.Optional;
 @Component
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
-    JwtService jwtService;
-    @Autowired
-    UserDetailsService userDetailsService;
-    @Autowired
-    TokenRepository tokenRepository;
-    @Autowired
-    EmpleadoService empleadoService;
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
+    private final TokenRepository tokenRepository;
+    private final EmpleadoService empleadoService;
+
+    public JWTAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService, TokenRepository tokenRepository, EmpleadoService empleadoService) {
+        this.jwtService = jwtService;
+        this.userDetailsService = userDetailsService;
+        this.tokenRepository = tokenRepository;
+        this.empleadoService = empleadoService;
+    }
 
     @Override
     protected void doFilterInternal(

@@ -18,8 +18,11 @@ import java.util.Optional;
 @RequestMapping("/employee")
 public class EmpleadoController {
 
-    @Autowired
-    private EmpleadoService service;
+    private final EmpleadoService service;
+
+    public EmpleadoController(EmpleadoService service) {
+        this.service = service;
+    }
 
     @GetMapping("/getEmployee/{email}")
     public ResponseEntity<EmployeeResponse> getEmployee(@PathVariable String email) {

@@ -33,12 +33,15 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired //Inyectando jwtFilter para
-    private JWTAuthenticationFilter jwtAuthFilter;
-    @Autowired
-    AuthenticationProvider authenticationProvider;
-    @Autowired
-    TokenRepository tokenRepository;
+    private final JWTAuthenticationFilter jwtAuthFilter;
+    private final AuthenticationProvider authenticationProvider;
+    private final TokenRepository tokenRepository;
+
+    public SecurityConfig(JWTAuthenticationFilter jwtAuthFilter, AuthenticationProvider authenticationProvider, TokenRepository tokenRepository) {
+        this.jwtAuthFilter = jwtAuthFilter;
+        this.authenticationProvider = authenticationProvider;
+        this.tokenRepository = tokenRepository;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {

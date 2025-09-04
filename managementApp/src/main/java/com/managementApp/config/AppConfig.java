@@ -16,8 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class AppConfig {
-    @Autowired
-    EmpleadoService empleadoService;
+
+    private final EmpleadoService empleadoService;
+
+    public AppConfig(EmpleadoService empleadoService) {
+        this.empleadoService = empleadoService;
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {

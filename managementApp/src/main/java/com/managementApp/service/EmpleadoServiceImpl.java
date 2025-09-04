@@ -19,8 +19,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class EmpleadoServiceImpl implements UserDetailsService, EmpleadoService {
-    @Autowired
-    EmpleadoRepository empleadoRepository;
+
+    private final EmpleadoRepository empleadoRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

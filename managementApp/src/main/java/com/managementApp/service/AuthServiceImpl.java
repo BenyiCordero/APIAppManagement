@@ -26,22 +26,23 @@ import java.util.List;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    EmpleadoRepository repository;
-    @Autowired
-    TokenRepository tokenRepository;
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    @Autowired
-    JwtService jwtService;
-    @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
-    EmpleadoService empleadoService;
-    @Autowired
-    DireccionService direccionService;
-    @Autowired
-    PersonaService personaService;
+    private final TokenRepository tokenRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private final EmpleadoService empleadoService;
+    private final DireccionService direccionService;
+    private final PersonaService personaService;
+
+    public AuthServiceImpl(TokenRepository tokenRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager, EmpleadoService empleadoService, DireccionService direccionService, PersonaService personaService) {
+        this.tokenRepository = tokenRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+        this.empleadoService = empleadoService;
+        this.direccionService = direccionService;
+        this.personaService = personaService;
+    }
 
     @Transactional //Hace que se haga todo y si falla no se hace nada, a falta de manejar la excepcion
     @Override
